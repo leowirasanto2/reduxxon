@@ -19,7 +19,11 @@ extension HomeViewState {
         case let HomeViewAction.receivedCharacter(characters):
             return state.copyWith(isLoading: false, characters: characters)
         case let HomeViewAction.selectCharacter(selected):
-            return state
+            return state.copyWith(isShowingDetailSheet: true, selectedCharacter: selected)
+        case HomeViewAction.showDetailSheet:
+            return state.copyWith(isShowingDetailSheet: true)
+        case HomeViewAction.hideDetailSheet:
+            return state.copyWith(isShowingDetailSheet: false)
         default:
             return state
         }

@@ -10,15 +10,19 @@ import Foundation
 struct HomeViewState: Equatable {
     let isLoading: Bool
     let characters: [Character]
+    let isShowingDetailSheet: Bool
+    let selectedCharacter: Character?
     
     static func initialState() -> HomeViewState {
-        .init(isLoading: false, characters: Character.loadingData)
+        .init(isLoading: false, characters: Character.loadingData, isShowingDetailSheet: false, selectedCharacter: nil)
     }
     
-    func copyWith(isLoading: Bool? = nil, characters: [Character]? = nil) -> HomeViewState {
+    func copyWith(isLoading: Bool? = nil, characters: [Character]? = nil, isShowingDetailSheet: Bool? = nil, selectedCharacter: Character? = nil) -> HomeViewState {
         .init(
             isLoading: isLoading ?? self.isLoading,
-            characters: characters ?? self.characters
+            characters: characters ?? self.characters,
+            isShowingDetailSheet: isShowingDetailSheet ?? self.isShowingDetailSheet,
+            selectedCharacter: selectedCharacter ?? self.selectedCharacter
         )
     }
 }

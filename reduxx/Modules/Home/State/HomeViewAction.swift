@@ -12,4 +12,6 @@ enum HomeViewAction: Action {
     case selectCharacter(selected: Character)
     case getCharacters
     case receivedCharacter(characters: [Character])
+    case showDetailSheet
+    case hideDetailSheet
 }

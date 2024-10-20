@@ -13,7 +13,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Star Wars Characters")
+            Text("All Characters")
                 .font(.title)
                 .frame(width: .infinity, alignment: .leading)
                 .fontWeight(.bold)
@@ -22,14 +22,39 @@ struct HomeView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .center) {
                         ForEach(chars) { char in
-                            CharacterResultView(c: char)
+                            Button {
+                                store.dispatch(HomeViewAction.selectCharacter(selected: char))
+                            } label: {
+                                CharacterResultView(c: char)
+                            }
                         }
                     }
+                    .foregroundStyle(.black)
                     .shimmer(when: Binding(get: { state?.isLoading ?? false }, set: { _ in }))
                 }
                 .scrollClipDisabled()
             }
         }
+        .sheet(
+            isPresented: Binding(
+                get: { state?.isShowingDetailSheet ?? false
+                },
+                set: { isShow in
+                    if isShow {
+                        store.dispatch(HomeViewAction.showDetailSheet)
+                    } else {
+                        store.dispatch(HomeViewAction.hideDetailSheet)
+                    }
+                }),
+            content: {
+                if let c = state?.selectedCharacter {
+                    Text(c.name)
+                        .font(.title)
+                        .presentationDetents([.medium])
+                } else {
+                    EmptyView()
+                }
+            })
         .padding()
         .onAppear {
             store.dispatch(HomeViewAction.getCharacters)

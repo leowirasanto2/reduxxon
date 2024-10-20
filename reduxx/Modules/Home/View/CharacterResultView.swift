@@ -30,5 +30,5 @@ struct CharacterResultView: View {
 }
 
 #Preview {
-    CharacterResultView(c: Character.mockCharacters.first!)
+    CharacterResultView(c: Character.avengerCharacters.first!)
 }
