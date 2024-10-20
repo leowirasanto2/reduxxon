@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HomeViewState: Equatable {
+struct HomeViewState: Codable, Equatable {
     let isLoading: Bool
     let characters: [Character]
     let isShowingDetailSheet: Bool

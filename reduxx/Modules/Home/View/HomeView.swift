@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var store: Store<HomeViewState>
-    private var state: HomeViewState? { store.state }
+    @EnvironmentObject var store: Store<AppState>
+    private var state: HomeViewState? { store.state.screenState(for: .home) as HomeViewState? }
     
     var body: some View {
         VStack(alignment: .leading) {

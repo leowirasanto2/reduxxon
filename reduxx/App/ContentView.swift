@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var store: Store<HomeViewState>
+    @EnvironmentObject var store: Store<AppState>
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                NavigationLink {
-                    HomeView()
-                        .environmentObject(store)
-                } label: {
-                    Text("Open Home")
+        
+        if store.state.screenState(for: .home) as HomeViewState? != nil {
+            HomeView()
+                .environmentObject(store)
+        } else {
+            Text("Splash Screen...")
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        store.dispatch(ActiveScreensAction.showScreen(.home))
+                    }
                 }
-
-            }
-            .padding()
         }
+        
     }
 }
 

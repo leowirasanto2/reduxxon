@@ -12,7 +12,7 @@ import SwiftUI
 final class HomeViewMiddleware {
     private var characterCancellable: AnyCancellable?
     
-    func middleware(state: HomeViewState, action: Action) -> AnyPublisher<Action, Never> {
+    func middleware(state: AppState, action: Action) -> AnyPublisher<Action, Never> {
         
         switch action {
         case HomeViewAction.getCharacters:

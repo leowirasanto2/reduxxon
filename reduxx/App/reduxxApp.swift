@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-let globalStore: Store<HomeViewState> = .init(
-    state: .initialState(),
-    reducer: HomeViewState.reducer,
+let globalStore = Store(
+    state: AppState.initState(),
+    reducer: AppState.reducer,
     middlewares: [HomeViewMiddleware().middleware]
 )
 
