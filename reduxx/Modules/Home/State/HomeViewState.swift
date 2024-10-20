@@ -12,7 +12,7 @@ struct HomeViewState: Equatable {
     let characters: [Character]
     
     static func initialState() -> HomeViewState {
-        .init(isLoading: false, characters: [])
+        .init(isLoading: false, characters: Character.loadingData)
     }
     
     func copyWith(isLoading: Bool? = nil, characters: [Character]? = nil) -> HomeViewState {

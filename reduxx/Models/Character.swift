@@ -30,4 +30,10 @@ extension Character {
         .init(name: "Leia Organa", height: 150, mass: 49, hairColor: "brown", skinColor: "light", eyeColor: "brown", birthYear: "19BBY", gender: "female", homeworld: "Alderaan"),
         .init(name: "Han Solo", height: 180, mass: 82, hairColor: "blond", skinColor: "fair", eyeColor: "blue", birthYear: "19BBY", gender: "male", homeworld: "Tatooine"),
     ]
+    
+    static let loadingData: [Character] = [
+        .init(name: "Loading...", height: 0, mass: 0, hairColor: "", skinColor: "", eyeColor: "", birthYear: "", gender: "", homeworld: ""),
+        .init(name: "Loading...2", height: 0, mass: 0, hairColor: "", skinColor: "", eyeColor: "", birthYear: "", gender: "", homeworld: ""),
+        .init(name: "Loading...3", height: 0, mass: 0, hairColor: "", skinColor: "", eyeColor: "", birthYear: "", gender: "", homeworld: "")
+    ]
 }

@@ -18,18 +18,19 @@ struct HomeView: View {
                 .frame(width: .infinity, alignment: .leading)
                 .fontWeight(.bold)
             
-            VStack {
-                if let c = state?.characters.first {
-                    Text(c.name)
-                        .font(.headline)
-                    Group {
-                        Text("\(c.mass) kg")
-                        Text("\(c.height) cm")
-                        Text(c.gender)
-                    }.font(.caption)
+            if let chars = state?.characters {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .center) {
+                        ForEach(chars) { char in
+                            CharacterResultView(c: char)
+                        }
+                    }
+                    .shimmer(when: Binding(get: { state?.isLoading ?? false }, set: { _ in }))
                 }
+                .scrollClipDisabled()
             }
         }
+        .padding()
         .onAppear {
             store.dispatch(HomeViewAction.getCharacters)
         }
@@ -39,4 +40,7 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environmentObject(globalStore)
+        .onAppear {
+            globalStore.dispatch(HomeViewAction.getCharacters)
+        }
 }
