@@ -12,28 +12,41 @@ struct HomeView: View {
     private var state: HomeViewState? { store.state.screenState(for: .home) as HomeViewState? }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("All Characters")
+        HStack {
+            Text("Reduxxxon App")
                 .font(.title)
-                .frame(width: .infinity, alignment: .leading)
-                .fontWeight(.bold)
             
-            if let chars = state?.characters {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center) {
-                        ForEach(chars) { char in
-                            Button {
-                                store.dispatch(HomeViewAction.selectCharacter(selected: char))
-                            } label: {
-                                CharacterResultView(c: char)
+            NavigationLink {
+                SearchView()
+            } label: {
+                Image(systemName: "magnifyingglass")
+            }
+        }
+        .frame(height: 85)
+        ScrollView {
+            VStack(alignment: .leading) {
+                Text("All Characters")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                
+                if let chars = state?.characters {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .center) {
+                            ForEach(chars) { char in
+                                Button {
+                                    store.dispatch(HomeViewAction.selectCharacter(selected: char))
+                                } label: {
+                                    CharacterResultView(c: char)
+                                }
                             }
                         }
+                        .foregroundStyle(.black)
+                        .shimmer(when: Binding(get: { state?.isLoading ?? false }, set: { _ in }))
                     }
-                    .foregroundStyle(.black)
-                    .shimmer(when: Binding(get: { state?.isLoading ?? false }, set: { _ in }))
+                    .scrollClipDisabled()
                 }
-                .scrollClipDisabled()
             }
+            .padding()
         }
         .sheet(
             isPresented: Binding(
@@ -50,12 +63,12 @@ struct HomeView: View {
                 if let c = state?.selectedCharacter {
                     Text(c.name)
                         .font(.title)
-                        .presentationDetents([.medium])
+                        .presentationDetents([.medium, .large])
                 } else {
                     EmptyView()
                 }
-            })
-        .padding()
+            }
+        )
         .onAppear {
             store.dispatch(HomeViewAction.getCharacters)
         }

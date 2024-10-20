@@ -12,6 +12,7 @@ extension AppScreenState {
         switch state {
         case .splashScreen: return .splashScreen
         case .home(let state): return .home(HomeViewState.reducer(state, action))
+        case .search(let state): return .search(SearchState.reducer(state, action))
         }
     }
 }

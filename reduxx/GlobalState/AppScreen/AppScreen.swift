@@ -10,5 +10,6 @@ import Foundation
 enum AppScreen {
     case splashScreen
     case home
+    case search
 }
 

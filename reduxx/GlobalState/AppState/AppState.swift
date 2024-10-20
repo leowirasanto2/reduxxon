@@ -23,6 +23,7 @@ extension AppState {
             .compactMap { s in
                 switch (s, screen) {
                 case (.home(let state), .home): return state as? State
+                case (.search(let state), .search): return state as? State
                 default: return nil
                 }
             }

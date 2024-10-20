@@ -10,6 +10,7 @@ import Foundation
 enum AppScreenState: Codable {
     case splashScreen
     case home(HomeViewState)
+    case search(SearchState)
 }
 
 extension AppScreenState: CustomStringConvertible {
@@ -19,6 +20,8 @@ extension AppScreenState: CustomStringConvertible {
             return "splashscreen"
         case .home(_):
             return "home"
+        case .search(_):
+            return "search"
         }
     }
 }
@@ -28,6 +31,7 @@ extension AppScreenState {
         switch (lhs, rhs) {
         case (.splashScreen, .splashScreen): return true
         case (.home, .home): return true
+        case (.search, .search): return true
         default: return false
         }
     }

@@ -17,6 +17,8 @@ extension ActiveScreenState {
                 screens = [.splashScreen]
             case ActiveScreensAction.showScreen(.home):
                 screens = [.home(HomeViewState.initialState())]
+            case ActiveScreensAction.showScreen(.search):
+                screens += [.search(SearchState.initialState())]
             case ActiveScreensAction.dismissScreen(let screen):
                 screens = screens.filter { $0 != screen }
             }

@@ -13,8 +13,10 @@ struct ContentView: View {
     var body: some View {
         
         if store.state.screenState(for: .home) as HomeViewState? != nil {
-            HomeView()
-                .environmentObject(store)
+            NavigationView {
+                HomeView()
+            }
+            .navigationViewStyle(.stack)
         } else {
             Text("Splash Screen...")
                 .onAppear {
